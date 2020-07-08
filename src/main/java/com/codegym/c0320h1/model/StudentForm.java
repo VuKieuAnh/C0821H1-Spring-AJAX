@@ -1,23 +1,19 @@
 package com.codegym.c0320h1.model;
 
-public class Student {
+import org.springframework.web.multipart.MultipartFile;
+
+public class StudentForm {
     private Long id;
     private String name;
     private String address;
-    private String image;
+    private MultipartFile image;
 
-    public Student() {
+    public Long getId() {
+        return id;
     }
 
-    public Student(String name, String address) {
-        this.name = name;
-        this.address = address;
-    }
-
-    public Student(Long id, String name, String address) {
+    public void setId(Long id) {
         this.id = id;
-        this.name = name;
-        this.address = address;
     }
 
     public String getName() {
@@ -36,28 +32,27 @@ public class Student {
         this.address = address;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getImage() {
+    public MultipartFile getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
     }
 
-    public Student(Long id, String name, String address, String image) {
+    public StudentForm(Long id, String name, String address, MultipartFile image) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.image = image;
     }
 
+    public StudentForm() {
+    }
 
+    public StudentForm(String name, String address, MultipartFile image) {
+        this.name = name;
+        this.address = address;
+        this.image = image;
+    }
 }

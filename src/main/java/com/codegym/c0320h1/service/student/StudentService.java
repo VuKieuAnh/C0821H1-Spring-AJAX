@@ -29,12 +29,20 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void save(Student model) {
+    public void update(Student model) {
         listStudent.put(model.getId(), model);
     }
 
     @Override
     public void remove(Long id) {
+
+    }
+
+    @Override
+    public void save(Student model) {
+        Long stt = listStudent.size() + 1L;
+        model.setId(stt);
+        listStudent.put(stt, model);
 
     }
 }

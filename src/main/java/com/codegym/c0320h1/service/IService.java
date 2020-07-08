@@ -7,6 +7,7 @@ public interface IService<T> {
 
     T findById(Long id);
 
+    void update(T model);
     void save(T model);
 
     void remove(Long id);
