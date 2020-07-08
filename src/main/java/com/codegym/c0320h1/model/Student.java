@@ -4,6 +4,7 @@ public class Student {
     private Long id;
     private String name;
     private String address;
+    private String image;
 
     public Student() {
     }
@@ -41,5 +42,20 @@ public class Student {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Student(Long id, String name, String address, String image) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.image = image;
     }
 }

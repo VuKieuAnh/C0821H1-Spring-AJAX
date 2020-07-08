@@ -11,10 +11,10 @@ public class StudentService implements IStudentService {
     private static Map<Long, Student> listStudent;
     static {
         listStudent = new HashMap<>();
-        listStudent.put(1L, new Student(1L, "Bao", "Thai Nguyen"));
-        listStudent.put(2L, new Student(2L,"Bao1", "Thai Nguyen1"));
-        listStudent.put(3L, new Student(3L,"Bao2", "Thai Nguyen2"));
-        listStudent.put(4L, new Student(4L,"Bao3", "Thai Nguyen3"));
+        listStudent.put(1L, new Student(1L, "Bao", "Thai Nguyen", "1.png"));
+        listStudent.put(2L, new Student(2L,"Bao1", "Thai Nguyen1", "2.png"));
+        listStudent.put(3L, new Student(3L,"Bao2", "Thai Nguyen2", "1.png"));
+        listStudent.put(4L, new Student(4L,"Bao3", "Thai Nguyen3", "1.png"));
     }
 
     @Override
