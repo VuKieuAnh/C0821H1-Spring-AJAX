@@ -31,7 +31,8 @@ public class StudentController {
         return mav;
     }
 
-    @GetMapping("/edit/{id}")
+//    @GetMapping("/edit/{id}")
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editForm(@PathVariable Long id){
         ModelAndView mav = new ModelAndView("/student/edit");
         mav.addObject("student", studentService.findById(id));

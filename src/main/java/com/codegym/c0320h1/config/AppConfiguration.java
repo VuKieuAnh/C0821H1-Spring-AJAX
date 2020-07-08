@@ -13,6 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -87,8 +88,14 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
         String fileUpload = env.getProperty("file_upload").toString();
 
         // Image resource.
-        registry.addResourceHandler("/igit /**") //
+        registry.addResourceHandler("/i/**") //
                 .addResourceLocations("file:" + fileUpload);
+    }
+
+    @Override
+    public void configureDefaultServletHandling(
+            DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 
     @Bean
