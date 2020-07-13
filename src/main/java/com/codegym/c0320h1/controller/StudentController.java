@@ -69,8 +69,15 @@ public class StudentController {
             e.printStackTrace();
         }
 
-        studentService.save(student);
+        studentService.update(student);
         return new ModelAndView("/student/create", "student", new StudentForm());
 
+    }
+
+    @GetMapping("/search")
+    public ModelAndView search(@RequestParam String studentname){
+        ModelAndView mav = new ModelAndView("student/list");
+        mav.addObject("list", studentService.listFindByName(studentname));
+        return mav;
     }
 }

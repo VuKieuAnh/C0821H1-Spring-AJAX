@@ -3,7 +3,7 @@ package com.codegym.c0320h1.service;
 import java.util.List;
 
 public interface IService<T> {
-    List<T> findAll();
+    Iterable<T> findAll();
 
     T findById(Long id);
 

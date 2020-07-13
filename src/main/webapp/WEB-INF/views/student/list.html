@@ -6,6 +6,12 @@
 </head>
 <body>
 <h1>Danh sach lop</h1>
+
+<form th:action="@{'students/search'}">
+    <input type="text" name="studentname">
+    <input type="submit" value="search">
+
+</form>
 <table>
     <tr>
         <th>name</th>

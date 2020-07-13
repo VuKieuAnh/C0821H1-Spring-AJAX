@@ -1,6 +1,8 @@
 package com.codegym.c0320h1.service.student;
 
 import com.codegym.c0320h1.model.Student;
+import com.codegym.c0320h1.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,41 +10,37 @@ import java.util.List;
 import java.util.Map;
 
 public class StudentService implements IStudentService {
-    private static Map<Long, Student> listStudent;
-    static {
-        listStudent = new HashMap<>();
-        listStudent.put(1L, new Student(1L, "Bao", "Thai Nguyen", "1.png"));
-        listStudent.put(2L, new Student(2L,"Bao1", "Thai Nguyen1", "2.png"));
-        listStudent.put(3L, new Student(3L,"Bao2", "Thai Nguyen2", "1.png"));
-        listStudent.put(4L, new Student(4L,"Bao3", "Thai Nguyen3", "4.png"));
-    }
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Override
-    public List<Student> findAll() {
-        ArrayList list = new ArrayList<>(listStudent.values());
-        return list;
+    public Iterable<Student> findAll() {
+        return studentRepository.findAll();
     }
 
     @Override
     public Student findById(Long id) {
-        return listStudent.get(id);
+        return studentRepository.findOne(id);
     }
 
     @Override
     public void update(Student model) {
-        listStudent.put(model.getId(), model);
+        studentRepository.save(model);
     }
 
     @Override
     public void remove(Long id) {
-
+        studentRepository.delete(id);
     }
 
     @Override
     public void save(Student model) {
-        Long stt = listStudent.size() + 1L;
-        model.setId(stt);
-        listStudent.put(stt, model);
 
+    }
+
+    @Override
+    public Iterable<Student> listFindByName(String name) {
+        return studentRepository.findAllByNameContaining(name);
     }
 }
