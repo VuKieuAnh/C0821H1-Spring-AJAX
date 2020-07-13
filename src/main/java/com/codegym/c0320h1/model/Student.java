@@ -13,7 +13,18 @@ public class Student {
     private String address;
     private String image;
 
+    @ManyToOne
+    private Classess classess;
+
     public Student() {
+    }
+
+    public Classess getClassess() {
+        return classess;
+    }
+
+    public void setClassess(Classess classess) {
+        this.classess = classess;
     }
 
     public Student(String name, String address) {
@@ -23,6 +34,14 @@ public class Student {
 
     public Student(Long id, String name, String address) {
         this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    public Student(Long id, String name, String address, String image, Classess classess) {
+        this.id = id;
+        this.image = image;
+        this.classess = classess;
         this.name = name;
         this.address = address;
     }

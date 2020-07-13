@@ -1,5 +1,6 @@
 package com.codegym.c0320h1.service.student;
 
+import com.codegym.c0320h1.model.Classess;
 import com.codegym.c0320h1.model.Student;
 import com.codegym.c0320h1.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class StudentService implements IStudentService {
     @Override
     public void save(Student model) {
 
+    }
+
+    @Override
+    public Iterable<Student> findAllByClassess(Classess classes) {
+        return studentRepository.findAllByClassess(classes);
     }
 
     @Override

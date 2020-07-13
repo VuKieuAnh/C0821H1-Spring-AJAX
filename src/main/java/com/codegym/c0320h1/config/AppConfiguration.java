@@ -1,5 +1,9 @@
 package com.codegym.c0320h1.config;
 
+import com.codegym.c0320h1.formater.ClassesFormater;
+import com.codegym.c0320h1.model.Classess;
+import com.codegym.c0320h1.service.classes.ClassesService;
+import com.codegym.c0320h1.service.classes.IClassesService;
 import com.codegym.c0320h1.service.student.IStudentService;
 import com.codegym.c0320h1.service.student.StudentService;
 import org.springframework.beans.BeansException;
@@ -12,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -154,5 +159,16 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
     @Bean
     public IStudentService studentService(){
         return new StudentService();
+    }
+
+    @Bean
+    public IClassesService classesService(){
+        return new ClassesService();
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+//        super.addFormatters(registry);
+        registry.addFormatter(new ClassesFormater(applicationContext.getBean(IClassesService.class)));
     }
 }

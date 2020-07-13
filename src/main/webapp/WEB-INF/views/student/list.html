@@ -8,7 +8,13 @@
 <h1>Danh sach lop</h1>
 
 <form th:action="@{'students/search'}">
-    <input type="text" name="studentname">
+
+    <select th:object="${listClass}">
+        <th:block th:each="classes:${listClass}">
+            <option th:value="${classes.id}" th:text="${classes.name}"></option>
+        </th:block>
+    </select>
+<!--    <input type="text" name="className">-->
     <input type="submit" value="search">
 
 </form>
@@ -17,6 +23,7 @@
         <th>name</th>
         <th>address</th>
         <th>image</th>
+        <th>classe</th>
         <th>Edit</th>
     </tr>
     <th:block th:each="student: ${list}">
@@ -24,6 +31,7 @@
         <td th:text="${student.getName()}"></td>
         <td th:text="${student.getAddress()}"></td>
         <td><img th:src="@{'/i/'+ ${student.getImage()}}" width="100"/></td>
+        <td th:text="${student.getClassess().name}"></td>
         <td><a th:href="@{'/students/edit/'+${student.getId()}}">Edit</a></td>
     </tr>
 

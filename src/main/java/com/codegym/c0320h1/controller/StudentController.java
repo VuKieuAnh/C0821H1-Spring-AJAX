@@ -1,7 +1,9 @@
 package com.codegym.c0320h1.controller;
 
+import com.codegym.c0320h1.model.Classess;
 import com.codegym.c0320h1.model.Student;
 import com.codegym.c0320h1.model.StudentForm;
+import com.codegym.c0320h1.service.classes.IClassesService;
 import com.codegym.c0320h1.service.student.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -23,11 +25,15 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
 
+    @Autowired
+    private IClassesService classesService;
+
     @GetMapping()
     public ModelAndView index(){
 
         ModelAndView mav = new ModelAndView("student/list");
         mav.addObject("list", studentService.findAll());
+        mav.addObject("listClass", classesService.findAll());
         return mav;
     }
 
@@ -75,9 +81,10 @@ public class StudentController {
     }
 
     @GetMapping("/search")
-    public ModelAndView search(@RequestParam String studentname){
+    public ModelAndView search(@RequestParam String className){
         ModelAndView mav = new ModelAndView("student/list");
-        mav.addObject("list", studentService.listFindByName(studentname));
+        Classess classess = classesService.findByName(className);
+        mav.addObject("list", studentService.findAllByClassess(classess));
         return mav;
     }
 }
