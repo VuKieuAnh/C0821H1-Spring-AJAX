@@ -18,9 +18,19 @@
             <td>address</td>
             <td><input th:field="*{address}"/></td>
         </tr>
+<!--        <tr>-->
+<!--            <td>image</td>-->
+<!--            <td><input type="file" th:field="*{image}"/></td>-->
+<!--        </tr>-->
         <tr>
-            <td>image</td>
-            <td><input type="file" th:field="*{image}"/></td>
+            <td>class</td>
+            <td>
+                <select th:field="*{classess}">
+                    <th:block th:each="classes1:${classeslist}">
+                        <option th:value="${classes1.id}" th:text="${classes1.name}"></option>
+                    </th:block>
+                </select>
+            </td>
         </tr>
         <tr>
             <td></td>

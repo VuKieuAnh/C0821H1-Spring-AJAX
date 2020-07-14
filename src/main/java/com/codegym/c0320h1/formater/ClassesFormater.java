@@ -25,6 +25,6 @@ public class ClassesFormater implements Formatter<Classess> {
 
     @Override
     public String print(Classess object, Locale locale) {
-        return null;
+        return "[" + object.getId() + ", " +object.getName() + "]";
     }
 }

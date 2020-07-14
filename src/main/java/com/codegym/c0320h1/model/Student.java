@@ -1,6 +1,8 @@
 package com.codegym.c0320h1.model;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,9 +14,20 @@ public class Student {
     private String name;
     private String address;
     private String image;
+    @Transient
+    private MultipartFile avata;
+
+    public MultipartFile getAvata() {
+        return avata;
+    }
+
+    public void setAvata(MultipartFile avata) {
+        this.avata = avata;
+    }
 
     @ManyToOne
     private Classess classess;
+
 
     public Student() {
     }
@@ -25,17 +38,6 @@ public class Student {
 
     public void setClassess(Classess classess) {
         this.classess = classess;
-    }
-
-    public Student(String name, String address) {
-        this.name = name;
-        this.address = address;
-    }
-
-    public Student(Long id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
     }
 
     public Student(Long id, String name, String address, String image, Classess classess) {
@@ -78,12 +80,12 @@ public class Student {
         this.image = image;
     }
 
-    public Student(Long id, String name, String address, String image) {
-        this.id = id;
+
+    public Student( String name, String address, String image, Classess classess, MultipartFile avata) {
+        this.avata = avata;
+        this.image = image;
+        this.classess = classess;
         this.name = name;
         this.address = address;
-        this.image = image;
     }
-
-
 }

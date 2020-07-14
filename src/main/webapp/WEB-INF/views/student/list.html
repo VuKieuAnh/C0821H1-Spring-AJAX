@@ -7,11 +7,11 @@
 <body>
 <h1>Danh sach lop</h1>
 
-<form th:action="@{'students/search'}">
+<form th:action="@{'/students/search'}" th:method="post">
 
-    <select th:object="${listClass}">
-        <th:block th:each="classes:${listClass}">
-            <option th:value="${classes.id}" th:text="${classes.name}"></option>
+    <select th:name="classess" th:id="classess">
+        <th:block th:each="classes1:${classeslist}">
+            <option th:value="${classes1.id}" th:text="${classes1.name}"></option>
         </th:block>
     </select>
 <!--    <input type="text" name="className">-->

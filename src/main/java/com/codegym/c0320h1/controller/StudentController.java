@@ -28,12 +28,17 @@ public class StudentController {
     @Autowired
     private IClassesService classesService;
 
+    @ModelAttribute("classeslist")
+    public Iterable<Classess> classesses(){
+        return classesService.findAll();
+    }
+
     @GetMapping()
     public ModelAndView index(){
 
         ModelAndView mav = new ModelAndView("student/list");
         mav.addObject("list", studentService.findAll());
-        mav.addObject("listClass", classesService.findAll());
+//        mav.addObject("listClass", classesService.findAll());
         return mav;
     }
 
@@ -57,15 +62,15 @@ public class StudentController {
     @GetMapping("/create")
     public ModelAndView showFormCreate(){
         ModelAndView modelAndView = new ModelAndView("/student/create");
-        modelAndView.addObject("student", new StudentForm());
+        modelAndView.addObject("student", new Student());
         return modelAndView;
     }
 
-    @PostMapping("/create")
-    public ModelAndView createStudent(@ModelAttribute StudentForm studentForm){
+    @PostMapping(value = "/create",  consumes = {"multipart/form-data"})
+    public ModelAndView createStudent(@RequestBody Student studentForm){
         //1 gan student nhung thuoc tinh cua studentForm
-        Student student = new Student(studentForm.getName(), studentForm.getAddress());
-        MultipartFile file = studentForm.getImage();
+        Student student = new Student();
+        MultipartFile file = studentForm.getAvata();
         String image = file.getOriginalFilename();
         student.setImage(image);
         String fileUpload = environment.getProperty("file_upload").toString();
@@ -80,10 +85,10 @@ public class StudentController {
 
     }
 
-    @GetMapping("/search")
-    public ModelAndView search(@RequestParam String className){
+    @PostMapping("/search")
+    public ModelAndView search(@ModelAttribute Classess classess){
         ModelAndView mav = new ModelAndView("student/list");
-        Classess classess = classesService.findByName(className);
+//        Classess classess = classesService.findByName(className);
         mav.addObject("list", studentService.findAllByClassess(classess));
         return mav;
     }

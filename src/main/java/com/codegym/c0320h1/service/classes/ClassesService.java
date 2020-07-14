@@ -15,7 +15,7 @@ public class ClassesService implements IClassesService {
 
     @Override
     public Classess findById(Long id) {
-        return null;
+        return classesRepository.findOne(id);
     }
 
     @Override
