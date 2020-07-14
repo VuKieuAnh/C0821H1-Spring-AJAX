@@ -15,37 +15,16 @@ public class Student {
     private String address;
     private String image;
     @Transient
-    private MultipartFile avata;
-
-    public MultipartFile getAvata() {
-        return avata;
-    }
-
-    public void setAvata(MultipartFile avata) {
-        this.avata = avata;
-    }
-
+    private MultipartFile avatar;
     @ManyToOne
     private Classess classess;
 
-
-    public Student() {
+    public Long getId() {
+        return id;
     }
 
-    public Classess getClassess() {
-        return classess;
-    }
-
-    public void setClassess(Classess classess) {
-        this.classess = classess;
-    }
-
-    public Student(Long id, String name, String address, String image, Classess classess) {
+    public void setId(Long id) {
         this.id = id;
-        this.image = image;
-        this.classess = classess;
-        this.name = name;
-        this.address = address;
     }
 
     public String getName() {
@@ -64,14 +43,6 @@ public class Student {
         this.address = address;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getImage() {
         return image;
     }
@@ -80,12 +51,44 @@ public class Student {
         this.image = image;
     }
 
+    public MultipartFile getAvatar() {
+        return avatar;
+    }
 
-    public Student( String name, String address, String image, Classess classess, MultipartFile avata) {
-        this.avata = avata;
-        this.image = image;
+    public void setAvatar(MultipartFile avatar) {
+        this.avatar = avatar;
+    }
+
+    public Classess getClassess() {
+        return classess;
+    }
+
+    public void setClassess(Classess classess) {
         this.classess = classess;
+    }
+
+    public Student() {
+    }
+
+    public Student(Long id, String name,String address, String image, MultipartFile avatar, Classess classess) {
+        this.id = id;
         this.name = name;
         this.address = address;
+        this.image = image;
+        this.avatar = avatar;
+        this.classess = classess;
+    }
+    public Student(String name,String address, MultipartFile avatar, Classess classess) {
+        this.name = name;
+        this.address = address;
+        this.avatar = avatar;
+        this.classess = classess;
+    }
+    public Student(String name,String address, String image, Classess classess) {
+        this.name = name;
+        this.address = address;
+        this.image = image;
+        this.classess = classess;
     }
 }
+

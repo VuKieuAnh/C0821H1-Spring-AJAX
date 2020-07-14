@@ -66,22 +66,20 @@ public class StudentController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/create",  consumes = {"multipart/form-data"})
-    public ModelAndView createStudent(@RequestBody Student studentForm){
+    @PostMapping(value = "/create")
+    public ModelAndView createStudent(@ModelAttribute Student studentForm){
         //1 gan student nhung thuoc tinh cua studentForm
-        Student student = new Student();
-        MultipartFile file = studentForm.getAvata();
+        MultipartFile file = studentForm.getAvatar();
         String image = file.getOriginalFilename();
-        student.setImage(image);
         String fileUpload = environment.getProperty("file_upload").toString();
         try {
             FileCopyUtils.copy(file.getBytes(), new File(fileUpload + image));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Student student = new Student(studentForm.getName(), studentForm.getAddress(), image, studentForm.getClassess());
         studentService.update(student);
-        return new ModelAndView("/student/create", "student", new StudentForm());
+        return new ModelAndView("/student/create", "student", new Student());
 
     }
 
