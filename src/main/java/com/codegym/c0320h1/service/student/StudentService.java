@@ -22,7 +22,9 @@ public class StudentService implements IStudentService {
 
     @Override
     public Student findById(Long id) {
-        return studentRepository.findOne(id);
+    Student student = studentRepository.findOne(id);
+    if (student != null) return student;
+    throw new RuntimeException("Khong tim thay");
     }
 
     @Override

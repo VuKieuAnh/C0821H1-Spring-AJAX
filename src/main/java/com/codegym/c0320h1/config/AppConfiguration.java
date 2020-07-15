@@ -1,5 +1,6 @@
 package com.codegym.c0320h1.config;
 
+import com.codegym.c0320h1.aspect.MyLogger;
 import com.codegym.c0320h1.formater.ClassesFormater;
 import com.codegym.c0320h1.model.Classess;
 import com.codegym.c0320h1.service.classes.ClassesService;
@@ -10,10 +11,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.FormatterRegistry;
@@ -46,6 +44,7 @@ import java.util.Properties;
 @ComponentScan("com.codegym.c0320h1.controller")
 @PropertySource("classpath:uploadfile.properties")
 @EnableJpaRepositories("com.codegym.c0320h1.repository")
+@EnableAspectJAutoProxy
 public class AppConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
@@ -113,6 +112,9 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
             DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+
+    @Bean
+    public MyLogger myLogger(){return new MyLogger();}
 
 
     @Bean
