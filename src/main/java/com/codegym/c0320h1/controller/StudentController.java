@@ -1,5 +1,6 @@
 package com.codegym.c0320h1.controller;
 
+import com.codegym.c0320h1.exception.NotFoundException;
 import com.codegym.c0320h1.model.Classess;
 import com.codegym.c0320h1.model.Student;
 import com.codegym.c0320h1.service.classes.IClassesService;
@@ -32,6 +33,12 @@ public class StudentController {
         return classesService.findAll();
     }
 
+
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView showInputNotAcceptable() {
+        return new ModelAndView("notfound");
+    }
+
     @GetMapping()
     public ModelAndView index(){
 
@@ -43,11 +50,13 @@ public class StudentController {
 
 //    @GetMapping("/edit/{id}")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView editForm(@PathVariable Long id){
+    public ModelAndView editForm(@PathVariable Long id) throws NotFoundException {
         ModelAndView mav = new ModelAndView("/student/edit");
         mav.addObject("student", studentService.findById(id));
         return mav;
     }
+
+
 
     @PostMapping("/edit/{id}")
     public ModelAndView editStudent(@ModelAttribute Student student){

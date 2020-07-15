@@ -1,5 +1,6 @@
 package com.codegym.c0320h1.service.student;
 
+import com.codegym.c0320h1.exception.NotFoundException;
 import com.codegym.c0320h1.model.Classess;
 import com.codegym.c0320h1.model.Student;
 import com.codegym.c0320h1.repository.StudentRepository;
@@ -21,10 +22,12 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public Student findById(Long id) {
-    Student student = studentRepository.findOne(id);
-    if (student != null) return student;
-    throw new RuntimeException("Khong tim thay");
+    public Student findById(Long id) throws NotFoundException{
+        Student student = studentRepository.findOne(id);
+        if (student != null){
+            return student;
+        }
+        else throw new NotFoundException();
     }
 
     @Override

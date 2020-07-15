@@ -1,6 +1,8 @@
 package com.codegym.c0320h1.formater;
 
+import com.codegym.c0320h1.exception.NotFoundException;
 import com.codegym.c0320h1.model.Classess;
+import com.codegym.c0320h1.model.Student;
 import com.codegym.c0320h1.service.classes.IClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
@@ -20,7 +22,13 @@ public class ClassesFormater implements Formatter<Classess> {
 
     @Override
     public Classess parse(String text, Locale locale) throws ParseException {
-        return classesService.findById(Long.parseLong(text));
+        Classess classess = new Classess();
+        try {
+            classess = classesService.findById(Long.parseLong(text));
+        } catch (NotFoundException notFoundException) {
+            notFoundException.printStackTrace();
+        }
+        return classess;
     }
 
     @Override

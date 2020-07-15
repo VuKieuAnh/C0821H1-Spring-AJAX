@@ -20,4 +20,5 @@ public class MyLogger {
             System.out.println(result.hashCode());
         }
     }
+
 }
