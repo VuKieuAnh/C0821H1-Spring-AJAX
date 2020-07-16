@@ -69,26 +69,26 @@ public class Student {
 
     public Student() {
     }
-
-    public Student(Long id, String name,String address, String image, MultipartFile avatar, Classess classess) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.image = image;
-        this.avatar = avatar;
-        this.classess = classess;
-    }
-    public Student(String name,String address, MultipartFile avatar, Classess classess) {
-        this.name = name;
-        this.address = address;
-        this.avatar = avatar;
-        this.classess = classess;
-    }
-    public Student(String name,String address, String image, Classess classess) {
-        this.name = name;
-        this.address = address;
-        this.image = image;
-        this.classess = classess;
-    }
+//
+//    public Student(Long id, String name,String address, String image, MultipartFile avatar, Classess classess) {
+//        this.id = id;
+//        this.name = name;
+//        this.address = address;
+//        this.image = image;
+//        this.avatar = avatar;
+//        this.classess = classess;
+//    }
+//    public Student(String name,String address, MultipartFile avatar, Classess classess) {
+//        this.name = name;
+//        this.address = address;
+//        this.avatar = avatar;
+//        this.classess = classess;
+//    }
+//    public Student(String name,String address, String image, Classess classess) {
+//        this.name = name;
+//        this.address = address;
+//        this.image = image;
+//        this.classess = classess;
+//    }
 }
 

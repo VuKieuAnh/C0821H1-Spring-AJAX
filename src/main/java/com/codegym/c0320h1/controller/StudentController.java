@@ -85,7 +85,12 @@ public class StudentController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Student student = new Student(studentForm.getName(), studentForm.getAddress(), image, studentForm.getClassess());
+//        Student student = new Student(studentForm.getName(), studentForm.getAddress(), image, studentForm.getClassess());
+        Student student = new Student();
+        student.setName(studentForm.getName());
+        student.setImage(image);
+        student.setAddress(studentForm.getAddress());
+        student.setClassess(studentForm.getClassess());
         studentService.update(student);
         return new ModelAndView("/student/create", "student", new Student());
 

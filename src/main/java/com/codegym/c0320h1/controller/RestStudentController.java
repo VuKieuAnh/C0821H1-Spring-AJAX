@@ -37,7 +37,7 @@ public class RestStudentController {
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Student> editStudent(@PathVariable Long id, @RequestBody Student student){
         student.setId(id);
         studentService.update(student);
