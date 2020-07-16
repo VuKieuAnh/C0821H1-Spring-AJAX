@@ -173,4 +173,6 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
 //        super.addFormatters(registry);
         registry.addFormatter(new ClassesFormater(applicationContext.getBean(IClassesService.class)));
     }
+
+
 }
