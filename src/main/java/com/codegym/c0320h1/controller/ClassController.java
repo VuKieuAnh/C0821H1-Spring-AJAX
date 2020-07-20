@@ -31,7 +31,7 @@ public class ClassController {
         return new ResponseEntity<>(classesService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping("/")
     public ResponseEntity<Classess> create(@RequestBody Classess classess){
         classesService.save(classess);
         return new ResponseEntity<>(HttpStatus.OK);

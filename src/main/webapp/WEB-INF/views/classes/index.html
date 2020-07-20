@@ -5,6 +5,57 @@
     <title>DS lop</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript">
+
+        function addClass() {
+            //lay du lieu
+
+            let className = $('#className').val();
+            let newClass = {
+                name: className
+            };
+            // goi ajax
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type:"POST",
+                data: JSON.stringify(newClass),
+                //tên API
+                url:"/classes/",
+                //xử lý khi thành công
+                success: successHandler
+
+            });
+            //chặn sự kiện mặc định của thẻ
+            event.preventDefault();
+        }
+
+        function successHandler() {
+            $.ajax({
+                type:"GET",
+                //tên API
+                url:"/classes",
+                //xử lý khi thành công
+                success: function(data){
+                    // hien thi danh sach o day
+                    let content ='    <tr>\n' +
+                        '        <td>ten lop</td>\n' +
+                        '        <td>xoa lop</td>\n' +
+                        '    </tr>';
+                    for (let i = 0 ; i < data.length; i++) {
+                        content += getClass(data[i]);
+                    }
+                    document.getElementById('classList').innerHTML = content;
+                }
+            });
+        }
+
+        function getClass(classe1) {
+            return `<tr><td >${classe1.name}</td>`+
+                `<td><a class="deleteClass" href="${classe1.id}">xoa</a></td></tr>`;
+        }
+
         $(document).ready(function () {
             //sư kiện nào thực hiện Ajax
             $('.deleteClass').click(function(event){
@@ -25,13 +76,16 @@
                 //chặn sự kiện mặc định của thẻ
                 event.preventDefault();
             });
-
         })
     </script>
 </head>
 <body>
+<form id="addClass">
+    <input type="text" id="className">
+    <input type="submit" value="them moi" onclick="addClass()">
+</form>
 <h1>Danh sach lop</h1>
-<table>
+<table id="classList">
     <tr>
         <td>ten lop</td>
         <td>xoa lop</td>
