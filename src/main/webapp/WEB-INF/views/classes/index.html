@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DS lop</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //sư kiện nào thực hiện Ajax
+            $('.deleteClass').click(function(event){
+                //lay du lieu
+                let a = $(this);
+                let idClass = a.attr("href");
+                // goi ajax
+                $.ajax({
+                    type:"DELETE",
+                    //tên API
+                    url:"/classes/"+ idClass,
+                    //xử lý khi thành công
+                    success: function (data) {
+                        a.parent().parent().remove();
+                    }
+
+                });
+                //chặn sự kiện mặc định của thẻ
+                event.preventDefault();
+            });
+
+        })
+    </script>
+</head>
+<body>
+<h1>Danh sach lop</h1>
+<table>
+    <tr>
+        <td>ten lop</td>
+        <td>xoa lop</td>
+    </tr>
+    <th:block th:each="c: ${list}">
+        <tr>
+            <td th:text="${c.name}"></td>
+            <td><a class="deleteClass" th:href="${c.getId()}">xoa</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

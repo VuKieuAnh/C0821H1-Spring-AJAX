@@ -25,12 +25,12 @@ public class ClassesService implements IClassesService {
 
     @Override
     public void save(Classess model) {
-
+        classesRepository.save(model);
     }
 
     @Override
     public void remove(Long id) {
-
+        classesRepository.delete(id);
     }
 
     @Override
