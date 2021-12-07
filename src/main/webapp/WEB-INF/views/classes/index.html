@@ -8,8 +8,8 @@
 
         function addClass() {
             //lay du lieu
-
             let className = $('#className').val();
+            //tao doi tuong
             let newClass = {
                 name: className
             };
@@ -24,7 +24,9 @@
                 //tên API
                 url:"/classes/",
                 //xử lý khi thành công
-                success: successHandler
+                success: function (){
+                    console.log("tao moi thanh cong");
+                }
 
             });
             //chặn sự kiện mặc định của thẻ
@@ -53,30 +55,45 @@
 
         function getClass(classe1) {
             return `<tr><td >${classe1.name}</td>`+
-                `<td><a class="deleteClass" href="${classe1.id}">xoa</a></td></tr>`;
+                `<td><a class="deleteClass" onclick="deleteClass(this)" href="${classe1.id}">xoa</a></td></tr>`;
         }
 
-        $(document).ready(function () {
-            //sư kiện nào thực hiện Ajax
-            $('.deleteClass').click(function(event){
-                //lay du lieu
-                let a = $(this);
-                let idClass = a.attr("href");
-                // goi ajax
-                $.ajax({
-                    type:"DELETE",
-                    //tên API
-                    url:"/classes/"+ idClass,
-                    //xử lý khi thành công
-                    success: function (data) {
-                        a.parent().parent().remove();
-                    }
 
-                });
-                //chặn sự kiện mặc định của thẻ
-                event.preventDefault();
+        function deleteClass(a){
+            let idClass = a.getAttribute("href");
+            // goi ajax
+            $.ajax({
+                type:"DELETE",
+                //tên API
+                url:"/classes/"+ idClass,
+                //xử lý khi thành công
+                success: function (data) {
+                    a.parentElement.parentElement.remove();
+                }
+
             });
-        })
+            //chặn sự kiện mặc định của thẻ
+            event.preventDefault();
+        }
+
+        function xoaLop(a){
+            //lay id cua lop
+            let id = a.getAttribute("href");
+            console.log(id);
+            //goi ajax
+            $.ajax({
+                //goi phuong thuc
+                type: "DELETE",
+                //duong dan API
+                url: "/classes/"+id,
+                // xu ly khi thanh cong
+                success: function (){
+                    //thay doi ma html
+                   a.parentElement.parentElement.remove();
+                }
+            })
+            event.preventDefault();
+        }
     </script>
 </head>
 <body>
@@ -93,7 +110,7 @@
     <th:block th:each="c: ${list}">
         <tr>
             <td th:text="${c.name}"></td>
-            <td><a class="deleteClass" th:href="${c.getId()}">xoa</a></td>
+            <td><a class="deleteClass" onclick="xoaLop(this)" th:href="${c.getId()}">xoa</a></td>
         </tr>
     </th:block>
 </table>
