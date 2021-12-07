@@ -55,26 +55,26 @@
 
         function getClass(classe1) {
             return `<tr><td >${classe1.name}</td>`+
-                `<td><a class="deleteClass" onclick="deleteClass(this)" href="${classe1.id}">xoa</a></td></tr>`;
+                `<td><a class="deleteClass" onclick="xoaLop(this)" href="${classe1.id}">xoa</a></td></tr>`;
         }
 
 
-        function deleteClass(a){
-            let idClass = a.getAttribute("href");
-            // goi ajax
-            $.ajax({
-                type:"DELETE",
-                //tên API
-                url:"/classes/"+ idClass,
-                //xử lý khi thành công
-                success: function (data) {
-                    a.parentElement.parentElement.remove();
-                }
-
-            });
-            //chặn sự kiện mặc định của thẻ
-            event.preventDefault();
-        }
+        // function deleteClass(a){
+        //     let idClass = a.getAttribute("href");
+        //     // goi ajax
+        //     $.ajax({
+        //         type:"DELETE",
+        //         //tên API
+        //         url:"/classes/"+ idClass,
+        //         //xử lý khi thành công
+        //         success: function (data) {
+        //             a.parentElement.parentElement.remove();
+        //         }
+        //
+        //     });
+        //     //chặn sự kiện mặc định của thẻ
+        //     event.preventDefault();
+        // }
 
         function xoaLop(a){
             //lay id cua lop
